@@ -52,7 +52,7 @@ namespace Race
         {
             WheelFrictionCurve leftForward = _leftWheelCollider.forwardFriction;
             WheelFrictionCurve rightForward = _rightWheelCollider.forwardFriction;
-            
+
             WheelFrictionCurve leftSideways = _leftWheelCollider.sidewaysFriction;
             WheelFrictionCurve rightSideways = _rightWheelCollider.sidewaysFriction;
 
@@ -72,7 +72,7 @@ namespace Race
         private void ApplyDownForce()
         {
             if (_leftWheelCollider.isGrounded == true)
-                _leftWheelCollider.attachedRigidbody.AddForceAtPosition(_leftWheelHit.normal * -_additionalWheelDownForce * 
+                _leftWheelCollider.attachedRigidbody.AddForceAtPosition(_leftWheelHit.normal * -_additionalWheelDownForce *
                     _leftWheelCollider.attachedRigidbody.velocity.magnitude, _leftWheelCollider.transform.position);
 
             if (_rightWheelCollider.isGrounded == true)
@@ -85,7 +85,7 @@ namespace Race
             float travelL = 1.0f;
             float travelR = 1.0f;
 
-            if (_leftWheelCollider.isGrounded == true)      
+            if (_leftWheelCollider.isGrounded == true)
                 travelL = (-_leftWheelCollider.transform.InverseTransformPoint(_leftWheelHit.point).y - _leftWheelCollider.radius) / _leftWheelCollider.suspensionDistance;
 
             if (_rightWheelCollider.isGrounded == true)
@@ -104,11 +104,11 @@ namespace Race
         {
             if (!_isSteer) return;
 
-            float radius = Mathf.Abs(wheelBaseLenght * Mathf.Tan(Mathf.Deg2Rad * (90 - Mathf.Abs(steerAngle)) ) );
+            float radius = Mathf.Abs(wheelBaseLenght * Mathf.Tan(Mathf.Deg2Rad * (90 - Mathf.Abs(steerAngle))));
             float angleSing = Mathf.Sign(steerAngle);
             if (steerAngle > 0)
             {
-                _leftWheelCollider.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLenght / (radius + (_wheelWidth * 0.5f)) ) * angleSing;
+                _leftWheelCollider.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLenght / (radius + (_wheelWidth * 0.5f))) * angleSing;
                 _rightWheelCollider.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLenght / (radius - (_wheelWidth * 0.5f))) * angleSing;
             }
 
@@ -126,17 +126,27 @@ namespace Race
         }
 
         public void ApplyMotorTorque(float motorTorque)
-        { 
-           if(!_isMotor) return;
+        {
+            if (!_isMotor) return;
 
-           _leftWheelCollider.motorTorque = motorTorque;
-           _rightWheelCollider.motorTorque = motorTorque;
+            _leftWheelCollider.motorTorque = motorTorque;
+            _rightWheelCollider.motorTorque = motorTorque;
         }
 
         public void ApplyBreakTorque(float brakeTorque)
         {
             _leftWheelCollider.brakeTorque = brakeTorque;
             _rightWheelCollider.brakeTorque = brakeTorque;
+        }
+
+        public float GetAvarageRpm()
+        {
+            return (_leftWheelCollider.rpm + _rightWheelCollider.rpm) * 0.5f;
+        }
+
+        public float GetRadius()
+        { 
+            return _leftWheelCollider.radius;
         }
 
         private void SyncMeshTransform()

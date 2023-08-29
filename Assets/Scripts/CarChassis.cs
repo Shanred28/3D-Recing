@@ -41,6 +41,23 @@ namespace Race
             UpdateWheelAxles();
         }
 
+        public float GetAverageRpm()
+        {
+            float sum = 0;
+
+            for (int i = 0; i < _wheelAxles.Length; i++)
+            {
+                sum += _wheelAxles[i].GetAvarageRpm();
+            }
+
+            return sum / _wheelAxles.Length;
+        }
+
+        public float GetWheelSpeed()
+        { 
+            return GetAverageRpm() * _wheelAxles[0].GetRadius() * 2 * 0.1885f;
+        }
+
         private void UpdateDownForce()
         {
              float downForce = Mathf.Clamp(_downForceFactor * linearVelocity, _downForceMin, _downForceMax);
