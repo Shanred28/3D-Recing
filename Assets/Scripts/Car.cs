@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Race
 {
@@ -13,8 +14,13 @@ namespace Race
         [SerializeField] private float _engineTorque;
         [SerializeField] private float _engineMaxTorque;
         [SerializeField] private float _engineRpm;
+
+        public float EngineRpm => _engineRpm;
+
         [SerializeField] private float _engineMinRpm;
         [SerializeField] private float _engineMaxRpm;
+
+        public float EngineMaxRpm => _engineMaxRpm;
 
         [Header("Gearbox")]
         [SerializeField] private float[] _gears;
@@ -45,6 +51,7 @@ namespace Race
 
         private CarChassis _chassis;
 
+        public event UnityAction<string> GearChange;
         private void Start()
         {
             _chassis = GetComponent<CarChassis>();
@@ -90,6 +97,8 @@ namespace Race
         public void ShiftToReverseGeear()
         {
             selecteedGear = rearGear;
+
+            GearChange?.Invoke(GetSelectedGearName());
         }
 
         public void ShiftToFirstGear()
@@ -99,13 +108,23 @@ namespace Race
         public void ShiftToNetral()
         {
             selecteedGear = 0;
+            GearChange?.Invoke(GetSelectedGearName());
         }
+
+        public string GetSelectedGearName()
+        { 
+            if(selecteedGear == rearGear) return "R";
+            if (selecteedGear == 0) return "N";
+            return (_selectedGeadIndex +1).ToString();
+        }                         
 
         private void ShiftGear(int gearIndex)
         {
             gearIndex = Mathf.Clamp(gearIndex, 0, _gears.Length - 1); 
             selecteedGear = _gears[gearIndex];
             _selectedGeadIndex = gearIndex;
+
+            GearChange?.Invoke(GetSelectedGearName());
         }
 
         private void UpdateEngineTorque()

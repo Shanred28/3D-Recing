@@ -149,6 +149,12 @@ namespace Race
             return _leftWheelCollider.radius;
         }
 
+        public void ConfigureVehicleSubSteps(float speedThreshold, int speedBelowThreshold, int stepAboveThreshold)
+        {
+            _leftWheelCollider.ConfigureVehicleSubsteps(speedThreshold, speedBelowThreshold, stepAboveThreshold);
+            _rightWheelCollider.ConfigureVehicleSubsteps(speedThreshold, speedBelowThreshold, stepAboveThreshold);
+        }
+
         private void SyncMeshTransform()
         {
             UpdateWheelTransform(_leftWheelCollider, _leftWheelMesh);

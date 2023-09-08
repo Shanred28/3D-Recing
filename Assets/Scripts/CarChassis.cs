@@ -26,11 +26,16 @@ namespace Race
         private new Rigidbody _rigidbody;
         public float linearVelocity => _rigidbody.velocity.magnitude * 3.6f;
 
-        private void Start () 
+        private void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             if (_centerOfMass != null)
                 _rigidbody.centerOfMass = _centerOfMass.localPosition;
+
+            for (int i = 0; i < _wheelAxles.Length; i++)
+            {
+                _wheelAxles[i].ConfigureVehicleSubSteps(5, 5, 5);
+            }
         }
 
         private void FixedUpdate()
