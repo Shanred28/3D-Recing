@@ -412,3 +412,7 @@ FodyWeavers.xsd
 *.txt
 /Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_CustomWind.cs
 /Assets/Conifers [BOTD]
+/Assets/Conifers [BOTD]
+*.pdf
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/Editor/CTI_AdvancedEdgeFluttering.cs
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/Editor/CTI_DetailsEnum.cs

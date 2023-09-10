@@ -48,10 +48,11 @@ namespace Race
 
                             _wheelsSmoke[i].transform.position = _skidTtaills[i].position;
                             _wheelsSmoke[i].Emit(5);
+                            continue;
                         }
                     }
                     isSlip = true;
-                    continue;
+                    
                 }
 
                 _skidTtaills[i] = null;

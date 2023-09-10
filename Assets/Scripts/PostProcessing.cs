@@ -6,8 +6,11 @@ namespace Race
     public class PostProcessing : MonoBehaviour
     {
         [SerializeField] private Car _car;
-        [SerializeField] private PostProcessVolume _postProcessing;
-        [SerializeField] private Vignette _vignette;
+        [SerializeField][Range(0, 1)] private float _minVignetteIntensity;
+        [SerializeField][Range(0, 1)] private float _maxVignetteIntensity;
+
+        private PostProcessVolume _postProcessing;
+        private Vignette _vignette;
 
         private void Start()
         {
@@ -20,7 +23,7 @@ namespace Race
 
         private void Update()
         {
-            _vignette.intensity.value = Mathf.Lerp(0, 0.486f, _car.NormalizeVelocity);
+            _vignette.intensity.value = Mathf.Lerp(_minVignetteIntensity, _maxVignetteIntensity, _car.NormalizeVelocity);
         }
     }
 }
