@@ -382,3 +382,32 @@ FodyWeavers.xsd
 /Assets/Sound
 /Assets/UnityTechnologies/ParticlePack
 /Assembly-CSharp-Editor.csproj
+/Assets/Conifers [BOTD]
+/Assets/Conifers [BOTD]
+/Assets/Conifers [BOTD]
+/Assets/Conifers [BOTD]
+/Assets/European Buildings
+/Assets/JP Environmental Asset Pack
+/Assets/ProceduralTerrainPainter
+/Assets/SimplePoly City - Low Poly Assets
+/Assets/SkySeries Freebie
+/Assets/TerrainSampleAssets
+/Assets/TerrainTexturesPackFree
+/Assets/_TerrainAutoUpgrade
+*.asset
+*.csproj
+/Assets/Conifers [BOTD]
+*.psd
+*.shader
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/Editor
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Shaders/Includes
+*.cginc
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/Demo
+*.unity
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/Prefabs
+*.prefab
+*.png
+*.tif
+*.unitypackage
+*.txt
+/Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_CustomWind.cs
