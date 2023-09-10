@@ -411,3 +411,4 @@ FodyWeavers.xsd
 *.unitypackage
 *.txt
 /Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_CustomWind.cs
+/Assets/Conifers [BOTD]

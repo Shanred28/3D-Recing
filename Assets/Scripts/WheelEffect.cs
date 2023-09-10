@@ -43,7 +43,6 @@ namespace Race
 
                         if (_skidTtaills[i] != null)
                         {
-                           // _skidTtaills[i].position = _wheels[i].transform.position - _wheelHit.normal * _wheels[i].radius;
                             _skidTtaills[i].position = _wheelHit.point + new Vector3(0, _yOffsetSkid,0);
                             _skidTtaills[i].forward = -_wheelHit.normal;
 

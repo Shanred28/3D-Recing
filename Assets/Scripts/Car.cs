@@ -39,6 +39,7 @@ namespace Race
         [SerializeField] private int _maxSpeed;
 
         public float LinearVelocity => _chassis.linearVelocity;
+        public float NormalizeVelocity => _chassis.linearVelocity / _maxSpeed;
         public float WheelSpeed => _chassis.GetWheelSpeed();
         public float MaxSpeed => _maxSpeed;
 
