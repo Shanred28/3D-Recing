@@ -11,20 +11,22 @@ namespace Race
         Race,
         Passed
     }
-    public class RaceStateTracker : MonoBehaviour
+    public class RaceStateTracker : MonoBehaviour, IDependency<TrackPointCircuit>
     {
         public event UnityAction eventPreparationStarted;
-        public event UnityAction eventStarter;
+        public event UnityAction eventStarted;
         public event UnityAction eventCompleted;
         public event UnityAction<TrackPoint> eventTrackPointPassed;
         public event UnityAction<int> eventLapCompleted;
 
-        [SerializeField] private TrackPointCircuit _trackPointCircuit;
         [SerializeField] private Timer _countDownTimer;
+        public Timer CountDownTimer => _countDownTimer;
         [SerializeField] private int _lapsToComplete;
 
         private RaceState _state;
         public RaceState State => _state;
+        private TrackPointCircuit _trackPointCircuit;
+        public void Construct(TrackPointCircuit obj) => _trackPointCircuit = obj;
 
         private void Start()
         {
@@ -36,9 +38,7 @@ namespace Race
             _trackPointCircuit.TrackPointTriggered += OnTrackPointTriggered;
             _trackPointCircuit.LapCompleted += OnLapCompleted;
         }
-
-       
-
+      
         private void OnDestroy()
         {
             _countDownTimer.eventFinishedTimer -= OnCountDownTimerFinished;
@@ -93,7 +93,7 @@ namespace Race
 
             StartState(RaceState.Race);
 
-            eventStarter?.Invoke();
+            eventStarted?.Invoke();
         }
 
         private void CompleteRace()

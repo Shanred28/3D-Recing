@@ -76,6 +76,24 @@ namespace Race
             if(_verticalAxis == 0)
                _car.brakeControl = _breakCurve.Evaluate(_wheelSpeed / _car.MaxSpeed) * _autoBreakStrength;
         }
+
+        public void Stop()
+        {
+            Reset();
+
+            _car.brakeControl = 1;
+        }
+
+        public void Reset()
+        {
+            _verticalAxis = 0;
+            _horizontalAxis = 0;
+            _handBreakAxis = 0;
+
+            _car.throttleControl = 0;
+            _car.steerControl = 0;
+            _car.brakeControl = 0;
+        }
     }
 }
 

@@ -2,11 +2,8 @@ using UnityEngine;
 
 namespace Race
 {
-    public class CameraFovCorrectors : MonoBehaviour
+    public class CameraFovCorrectors : CarCameraComponent
     {
-        [SerializeField] private Car _car;
-        private new Camera _camera;
-
         [SerializeField] private float _minFieldOfView;
         [SerializeField] private float _maxFieldOfView;
 

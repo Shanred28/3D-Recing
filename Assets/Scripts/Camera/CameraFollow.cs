@@ -2,11 +2,8 @@ using UnityEngine;
 
 namespace Race
 {
-    public class CameraFollow : MonoBehaviour
+    public class CameraFollow : CarCameraComponent
     {
-        [SerializeField] private Transform _target;
-        [SerializeField] private new Rigidbody _rigidbody;
-
         [Header("Offset")]
         [SerializeField] private float _viewHeight;
         [SerializeField] private float _height;
@@ -17,6 +14,8 @@ namespace Race
         [SerializeField] private float _heightDamping;
         [SerializeField] private float _speedThreshold;
 
+        private Transform _target;
+        private new Rigidbody _rigidbody;
         private void FixedUpdate()
         {
 
@@ -39,6 +38,13 @@ namespace Race
 
             //Rotation
             transform.LookAt(_target.position + new Vector3(0, _viewHeight, 0) );
+        }
+
+        public override void SetProperties(Car car, Camera camera)
+        {
+            base.SetProperties(car, camera);
+            _target = car.transform;
+            _rigidbody = car.Rigidbody;
         }
     }
 }

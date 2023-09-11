@@ -3,24 +3,24 @@ using UnityEngine;
 
 namespace Race
 {
-    public class UICountDownTimer : MonoBehaviour
+    public class UICountDownTimer : MonoBehaviour, IDependency<RaceStateTracker>
     {
-        [SerializeField] private RaceStateTracker _raceStateTracker;
-
         [SerializeField] private TMP_Text _textTimer;
-        [SerializeField] private Timer _countDownTimer;
+
+        private RaceStateTracker _raceStateTracker;
+        public void Construct(RaceStateTracker obj) => _raceStateTracker = obj;
 
         private void Start()
         {
             _raceStateTracker.eventPreparationStarted += OnPreparationStarted;
-            _raceStateTracker.eventStarter += OnRaceStarted;
+            _raceStateTracker.eventStarted += OnRaceStarted;
 
             _textTimer.enabled = false;
         }
 
         private void Update() 
         { 
-          _textTimer.text = _countDownTimer.Value.ToString("F0");
+          _textTimer.text = _raceStateTracker.CountDownTimer.Value.ToString("F0");
             if (_textTimer.text == "0")
                 _textTimer.text = "GO!";
         }

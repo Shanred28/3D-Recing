@@ -2,9 +2,11 @@ using UnityEngine;
 
 namespace Race
 {
-    public class RaceKeyboardStarter : MonoBehaviour
+    public class RaceKeyboardStarter : MonoBehaviour, IDependency<RaceStateTracker>
     {
-       [SerializeField] private RaceStateTracker _raceStateTracker;
+       private RaceStateTracker _raceStateTracker;
+       public void Construct(RaceStateTracker obj) => _raceStateTracker = obj;
+
 
         private void Update()
         {

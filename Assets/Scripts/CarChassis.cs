@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Race
@@ -24,11 +25,13 @@ namespace Race
         public float steerAngle;
 
         private new Rigidbody _rigidbody;
+        public Rigidbody Rigidbody => _rigidbody == null ? _rigidbody = GetComponent<Rigidbody>() : _rigidbody;
         public float linearVelocity => _rigidbody.velocity.magnitude * 3.6f;
 
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
+
             if (_centerOfMass != null)
                 _rigidbody.centerOfMass = _centerOfMass.localPosition;
 
@@ -90,6 +93,12 @@ namespace Race
                 _wheelAxles[i].ApplyBreakTorque(breakTorque);
                 _wheelAxles[i].ApplySteeerAngle(steerAngle, _wheelBaseLenght);
             }
+        }
+
+        public void Reset()
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
         }
     }
 }

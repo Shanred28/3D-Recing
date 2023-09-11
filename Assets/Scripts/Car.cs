@@ -51,6 +51,7 @@ namespace Race
         //public float handBrakeControl;
 
         private CarChassis _chassis;
+        public Rigidbody Rigidbody => _chassis == null ?  GetComponent<CarChassis>().Rigidbody : _chassis.Rigidbody;
 
         public event UnityAction<string> GearChange;
         private void Start()
@@ -134,6 +135,28 @@ namespace Race
             _engineRpm = Mathf.Clamp(_engineRpm, _engineMinRpm, _engineMaxRpm);
 
             _engineTorque = _engineTorqueCurve.Evaluate(_engineRpm / _engineMaxRpm) * _engineMaxTorque * _finalDriveRatio * Mathf.Sign(selecteedGear) * _gears[0];
+        }
+
+        public void Reset()
+        {
+            _chassis.Reset();
+            
+            _chassis.motorTorque = 0;
+            _chassis.breakTorque = 0;
+            _chassis.steerAngle = 0;
+
+            throttleControl = 0;
+            brakeControl = 0;
+            steerControl = 0;
+
+        }
+
+        public void Respawn(Vector3 position, Quaternion rotation)
+        { 
+
+
+            transform.position = position;
+            transform.rotation = rotation;
         }
     }
 }
