@@ -6,6 +6,7 @@ namespace Race
     public class UICountDownTimer : MonoBehaviour, IDependency<RaceStateTracker>
     {
         [SerializeField] private TMP_Text _textTimer;
+        [SerializeField] private TMP_Text _text;
 
         private RaceStateTracker _raceStateTracker;
         public void Construct(RaceStateTracker obj) => _raceStateTracker = obj;
@@ -16,6 +17,7 @@ namespace Race
             _raceStateTracker.eventStarted += OnRaceStarted;
 
             _textTimer.enabled = false;
+            _text.enabled = true;
         }
 
         private void Update() 
@@ -28,12 +30,14 @@ namespace Race
         private void OnPreparationStarted()
         {
             _textTimer.enabled = true;
+            _text.enabled = false;
             enabled = true;
         }
         private void OnRaceStarted()
         {
             _textTimer.enabled = false;
-            enabled = false;
+
+            gameObject.SetActive(false);
         }
     }
 }

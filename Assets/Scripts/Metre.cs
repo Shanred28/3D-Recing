@@ -1,14 +1,19 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 namespace Race
 {
-    public class Metre : MonoBehaviour
+    public class Metre : MonoBehaviour, IDependency<Car>, IDependency<RaceStateTracker>
     {
-        [SerializeField] private Car _car;
+        private Car _car;
+        public void Construct(Car obj) => _car = obj;
+
+        private RaceStateTracker _raceStateTracker;
+        public void Construct(RaceStateTracker obj) => _raceStateTracker = obj;
 
         [SerializeField] private RectTransform _arrowSpeed;
-        [SerializeField] private RectTransform _aarowTaxometre;
+        [SerializeField] private RectTransform _arrowTaxometre;
 
         [SerializeField] private TMP_Text _textSpeed;
         [SerializeField] private TMP_Text _texttaxometre;
@@ -21,6 +26,10 @@ namespace Race
             _arrowSpeed.rotation = Quaternion.Euler(0f, 0f, -117f);
             _car.GearChange += OnGearChange;
             _maxEngineRPM = _car.EngineMaxRpm;
+            _raceStateTracker.eventPreparationStarted += OnPreparationStarted;
+            _raceStateTracker.eventCompleted += OnPreparationCompleted;
+            gameObject.SetActive(false);
+            
         }
 
         private void Update()
@@ -33,13 +42,14 @@ namespace Race
 
             float engineRPM = _car.EngineRpm;
             float angleEngineSpeed = MapValue(engineRPM, 0f, _maxEngineRPM, 115f, -115f);
-            _aarowTaxometre.rotation = Quaternion.Euler(0f, 0f, angleEngineSpeed);
+            _arrowTaxometre.rotation = Quaternion.Euler(0f, 0f, angleEngineSpeed);
 
         }
 
         private void OnDestroy()
         {
             _car.GearChange -= OnGearChange;
+            _raceStateTracker.eventPreparationStarted -= OnPreparationStarted;
         }
 
         float MapValue(float value, float inputMin, float inputMax, float outputMin, float outputMax)
@@ -50,6 +60,15 @@ namespace Race
         private void OnGearChange(string gearName)
         {
             _texttaxometre.text = gearName;
+        }
+
+        private void OnPreparationStarted()
+        {
+            gameObject.SetActive(true);
+        }
+        private void OnPreparationCompleted()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

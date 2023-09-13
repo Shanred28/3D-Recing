@@ -5,7 +5,7 @@ public class SceneRestarter : MonoBehaviour
 {
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace) == true)
+        if (Input.GetKeyDown(KeyCode.Escape) == true)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

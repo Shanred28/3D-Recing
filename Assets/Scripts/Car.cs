@@ -152,8 +152,8 @@ namespace Race
         }
 
         public void Respawn(Vector3 position, Quaternion rotation)
-        { 
-
+        {
+            Reset();
 
             transform.position = position;
             transform.rotation = rotation;

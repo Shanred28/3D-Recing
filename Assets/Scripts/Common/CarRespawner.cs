@@ -24,7 +24,7 @@ public class CarRespawner : MonoBehaviour, IDependency<RaceStateTracker>, IDepen
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) == true)
+        if (Input.GetKeyDown(KeyCode.Backspace) == true)
             Respawn();
     }
 

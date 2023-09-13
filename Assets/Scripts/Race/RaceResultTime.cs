@@ -43,7 +43,7 @@ namespace Race
         {
             float absolutRecord = GetAbsolureeRecord();
 
-            if (_raceTimerTracker.CurrentTime < absolutRecord || _playerRecordTime == 0)
+            if (_raceTimerTracker.CurrentTime < absolutRecord || _playerRecordTime == 0 || _raceTimerTracker.CurrentTime < _playerRecordTime)
             {
                 _playerRecordTime = _raceTimerTracker.CurrentTime;
                 Save();
@@ -55,7 +55,7 @@ namespace Race
 
         public float GetAbsolureeRecord()
         {
-            if (_playerRecordTime < _goldTime && _playerRecordTime != 0)
+            if (_playerRecordTime < _goldTime && _playerRecordTime != 0 )
                 return _playerRecordTime;
             else
                 return _goldTime;
