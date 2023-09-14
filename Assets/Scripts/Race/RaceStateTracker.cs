@@ -22,6 +22,7 @@ namespace Race
         [SerializeField] private Timer _countDownTimer;
         public Timer CountDownTimer => _countDownTimer;
         [SerializeField] private int _lapsToComplete;
+        public int LapsToComplete => _lapsToComplete;
 
         private RaceState _state;
         public RaceState State => _state;

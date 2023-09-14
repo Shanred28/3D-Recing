@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace RaceUI
 {
-    public class UIRaceButton : UISeelectableButton
+    public class UIRaceButton : UISeelectableButton, IScriptableObjectProperty
     {
         [SerializeField] private RaceInfo _raceInfo;
         [SerializeField] private Image _icon;
@@ -15,14 +15,15 @@ namespace RaceUI
 
         private void Start () 
         {
-            ApllyProperty(_raceInfo);
+            ApplyProperty(_raceInfo);
         }
 
-        public void ApllyProperty(RaceInfo property)
+        public void ApplyProperty(ScriptableObject property)
         {
             if (property == null) return;
+            if(property is RaceInfo == false) return;
 
-            _raceInfo = property;
+            _raceInfo = property as RaceInfo;
 
             _icon.sprite = _raceInfo.Icon;
             _textTitle.text = _raceInfo.Title; 

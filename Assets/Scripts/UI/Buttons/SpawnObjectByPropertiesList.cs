@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace RaceUI
 {
-    public class UIRaceSpawnButton : MonoBehaviour
+    public class SpawnObjectByPropertiesList : MonoBehaviour
     {
         [SerializeField] private Transform _parent;
-        [SerializeField] private UIRaceButton _uiRaceButtonPrefab;
-        [SerializeField] private RaceInfo[] _properties;
+        [SerializeField] private GameObject _prefab;
+        [SerializeField] private ScriptableObject[] _properties;
 
-        [ContextMenu(nameof(Spawn))]
-        public void Spawn()
+        [ContextMenu(nameof(SpawnInEditMode))]
+        public void SpawnInEditMode()
         {
             if (Application.isPlaying == true) return;
 
@@ -27,8 +27,9 @@ namespace RaceUI
 
             for (int i = 0; i < _properties.Length; i++)
             {
-                UIRaceButton button = Instantiate(_uiRaceButtonPrefab, _parent);
-                button.ApllyProperty(_properties[i]);
+                GameObject go = Instantiate(_prefab, _parent);
+                IScriptableObjectProperty scriptableObjectProperty = go.GetComponent<IScriptableObjectProperty>();
+                scriptableObjectProperty.ApplyProperty(_properties[i]);
             }
         }
     }

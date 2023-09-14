@@ -40,12 +40,12 @@ namespace RaceUI
 
         public override void Load()
         {
-            _currentLevelIndex = PlayerPrefs.GetInt(title, 0);
+            _currentLevelIndex = PlayerPrefs.GetInt(title, QualitySettings.names.Length - 1);
         }
 
         private void Save()
         {
-            PlayerPrefs.SetFloat(title, _currentLevelIndex);
+            PlayerPrefs.SetInt(title, _currentLevelIndex);
         }
     }
 }

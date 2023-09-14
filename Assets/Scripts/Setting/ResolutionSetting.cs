@@ -48,12 +48,12 @@ namespace RaceUI
 
         public override void Load()
         {
-            _currentresolutionIndex = PlayerPrefs.GetInt(title, 0);
+            _currentresolutionIndex = PlayerPrefs.GetInt(title, _avalibaleResolutions.Length - 1);
         }
 
         private void Save()
         {
-            PlayerPrefs.SetFloat(title, _currentresolutionIndex);
+            PlayerPrefs.SetInt(title, _currentresolutionIndex);
         }
     }
 }

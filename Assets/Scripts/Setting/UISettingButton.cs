@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace RaceUI
 {
-    public class UISettingButton : UISeelectableButton
+    public class UISettingButton : UISeelectableButton, IScriptableObjectProperty
     {
         [SerializeField] private Setting _setting;
         [SerializeField] private TMP_Text _titleText;
@@ -14,7 +14,7 @@ namespace RaceUI
 
         private void Start()
         {
-            ApllyProperty(_setting);
+            ApplyProperty(_setting);
         }
 
         public void SetNextValueSetting()
@@ -39,10 +39,13 @@ namespace RaceUI
             _nextImage.enabled = !_setting.isMaxValue;
         }
 
-        public void ApllyProperty(Setting property)
+        public void ApplyProperty(ScriptableObject property)
         {
             if (property == null) return;
-            _setting = property;
+            if (property is Setting == false) return;
+
+            _setting = property as Setting;
+
             UpdateInfo();
         }
     }
