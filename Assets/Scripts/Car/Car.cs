@@ -34,8 +34,6 @@ namespace Race
         [SerializeField] private float selecteedGear;
         [SerializeField] private float rearGear;
 
-
-
         [SerializeField] private int _maxSpeed;
 
         public float LinearVelocity => _chassis.linearVelocity;

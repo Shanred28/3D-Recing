@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Race
 {
@@ -67,12 +67,16 @@ namespace Race
             if (_trackPointCircuit.TrackType == TrackType.Sprint)
             {
                 CompleteRace();
+                Save();
             }
 
             if (_trackPointCircuit.TrackType == TrackType.Circular)
             {
                 if (lapAmount == _lapsToComplete)
+                {
                     CompleteRace();
+                    Save();
+                }                  
                 else
                     CompleteLap(lapAmount);
             }                
@@ -109,6 +113,13 @@ namespace Race
         private void CompleteLap(int lapAmount)
         {
             eventLapCompleted?.Invoke(lapAmount);
+        }
+
+        private void Save()
+        {
+            var a = SceneManager.GetActiveScene().name;
+            PlayerPrefs.SetInt(a, 1);
+            print(a);
         }
     }
 }

@@ -88,7 +88,6 @@ namespace Race
         {
             _verticalAxis = 0;
             _horizontalAxis = 0;
-            _handBreakAxis = 0;
 
             _car.throttleControl = 0;
             _car.steerControl = 0;
